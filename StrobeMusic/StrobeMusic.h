@@ -7,6 +7,12 @@
 
 #ifndef STROBEMUSIC_H_
 #define STROBEMUSIC_H_
+
+#define lowVolume 0b00011000
+#define midVolume 0b0010010000011000
+#define highVolume 0b0110011000011000
+#define veryHighVolume 0b1110011100011000
+
 int strobeMusic[9] = {
 
 		0b00000000,
