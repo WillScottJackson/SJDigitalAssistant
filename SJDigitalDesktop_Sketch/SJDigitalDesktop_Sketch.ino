@@ -1,3 +1,6 @@
+/*TODO, Is it possible to have the mic input interrupt driven
+as opposed to using a polling loop?*/
+
 #include <StrobeMusic.h>
 #include <StrobePattern.h>
 #include <TM1638.h>
