@@ -5,6 +5,7 @@
 #define micInput 10
 int val = 0;
 char buffer[8];
+String time = "";
 
 TM1638 module(8, 9, 7);
 
@@ -14,8 +15,7 @@ void setup() {
 }
 
 void loop() {
-  //detectBeat();
-  getTime();
+  detectBeat();
   displayTime();
   delay(100);
 }
@@ -37,15 +37,16 @@ void detectBeat() {
   } 
 }
 
-void getTime() {
-  if (Serial.available() > 0) {
-    digitalWrite(13, HIGH);
-    Serial.readBytes(buffer, 8);
-  }
-}
-
 void displayTime() {
   /*TODO: Concatenate each of the buffer characters into a 
   single string to be sent to the display strip*/
+  time = buffer[2] + "." + buffer[1] + "." + buffer[0];
+  module.setDisplayToString(time);
   
+}
+
+void serialEvent() {
+  while (Serial.availale()) {
+    Serial.readBytes(buffer, 8);
+  }
 }
