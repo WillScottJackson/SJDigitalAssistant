@@ -8,7 +8,9 @@ as opposed to using a polling loop?*/
 #define micInput 10
 int val = 0;
 char buffer[8];
-String time = "";
+byte lookupTable[11] = {63, 6, 91, 79, 226, 109, 125, 7, 127, 111, 128};
+byte outputBuffer[8];
+String time;
 
 TM1638 module(8, 9, 7);
 
@@ -19,8 +21,6 @@ void setup() {
 
 void loop() {
   detectBeat();
-  displayTime();
-  delay(100);
 }
 
 void detectBeat() {
@@ -41,15 +41,13 @@ void detectBeat() {
 }
 
 void displayTime() {
-  /*TODO: Concatenate each of the buffer characters into a 
-  single string to be sent to the display strip*/
-  time = buffer[2] + "." + buffer[1] + "." + buffer[0];
-  module.setDisplayToString(time);
-  
+  /*TODO: Need to divide up the time components so that they have each have
+  a segment on the screen. I'll use my fouth year project display sorting
+  algorithm*/
 }
 
 void serialEvent() {
-  while (Serial.availale()) {
+  if (Serial.available()) {
     Serial.readBytes(buffer, 8);
   }
 }
